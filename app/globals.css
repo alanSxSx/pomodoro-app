@@ -54,6 +54,7 @@ text-align: center;
 	cursor: pointer;
 	padding: 10px 25px;
 	color: #000;
+	background-color: aquamarine;
 	transition: background-color 300ms ease-in-out;
 	margin: 20px auto;
 }
