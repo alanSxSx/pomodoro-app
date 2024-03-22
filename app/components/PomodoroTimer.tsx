@@ -73,7 +73,7 @@ export default function PomodoroTimer(props: Props) {
 		}, [working,resting,mainTime,cyclesQtdManager,numberOfPomodoros,completedCycles,configureResting,setCyclesQtdManager,configureWork,props.cycles])
 
 	return (
-		<div className='pomodoro'>
+		<div data-testId="pomodoro-timer" className='pomodoro'>
 			<h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
 			<Timer mainTime={mainTime} />
 			<div className="controls">

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import PomodoroTimer from './components/PomodoroTimer'
 
 export default function Home() {
