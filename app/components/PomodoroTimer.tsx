@@ -73,18 +73,18 @@ export default function PomodoroTimer(props: Props) {
 		}, [working,resting,mainTime,cyclesQtdManager,numberOfPomodoros,completedCycles,configureResting,setCyclesQtdManager,configureWork,props.cycles])
 
 	return (
-		<div data-testId="pomodoro-timer" className='pomodoro'>
+		<div data-testid="pomodoro-timer" className='pomodoro'>
 			<h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
 			<Timer mainTime={mainTime} />
 			<div className="controls">
-				<Button text='Working' onClick={() => configureWork()} />
+				<Button data-testid="start-cycle-button" text='Working' onClick={() => configureWork()} />
 				<Button text='Rest' onClick={() => configureResting(false)} />
 				<Button className={!working && !resting ? 'hidden' : ''} text={timeConting? 'Pause' : 'Play'} onClick={() => setTimeConting(!timeConting)} />
 			</div>
 			<div className="details">
-				<p>Ciclos Concluídos: {completedCycles}</p>
-				<p>Horas Trabalhadas: {SecondToTime(fullWorkingTime)}</p>
-				<p>Pomodoros Concluídos: {numberOfPomodoros}</p>
+				<p data-testid="ciclos-concluidos" >Ciclos Concluídos: {completedCycles}</p>
+				<p data-testid="horas-trabalhadas">Horas Trabalhadas: {SecondToTime(fullWorkingTime)}</p>
+				<p data-testid="pomodoros-concluidos">Pomodoros Concluídos: {numberOfPomodoros}</p>
 
 			</div>
 		</div>

@@ -3,7 +3,7 @@ import PomodoroTimer from './components/PomodoroTimer'
 export default function Home() {
   return (
     <div data-testid="container" className="container">
-			<PomodoroTimer pomodoroTime={1500} shortRestTime={300} longRestTime={900} cycles={4}/>
+			<PomodoroTimer pomodoroTime={5} shortRestTime={300} longRestTime={900} cycles={4}/>
     </div>
   )
 }
