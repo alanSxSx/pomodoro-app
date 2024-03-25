@@ -5,8 +5,8 @@ import Button from './Button';
 import Timer from './Timer';
 import SecondToTime from '../utils/SecondToTime';
 
-const audioStartWorking = typeof window !== 'undefined' ? new Audio('/sounds/bell-start.mp3') : null;
-const audioFinishWorking = typeof window !== 'undefined' ? new Audio('/sounds/bell-finish.mp3') : null;
+export const audioStartWorking = typeof window !== 'undefined' ? new Audio('/sounds/bell-start.mp3') : null;
+export const audioFinishWorking = typeof window !== 'undefined' ? new Audio('/sounds/bell-finish.mp3') : null;
 
 interface Props {
 	pomodoroTime: number;
