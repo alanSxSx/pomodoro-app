@@ -34,17 +34,13 @@ export default function PomodoroTimer(props: Props) {
   	const audioFinishWorkingRef = useRef<HTMLAudioElement>(null);
 
 	  useEffect(() => {
-		if (audioStartWorkingRef.current) {
-		  audioStartWorkingRef.current.id = 'audio-start-working';
-		}
-		
-	  }, [audioStartWorkingRef]);
+		audioStartWorkingRef.current
+	
+	  }, []);
 
 	  useEffect(() => {
-		if (audioFinishWorkingRef.current) {
-		  audioFinishWorkingRef.current.id = 'audio-finish-working';
-		}
-	  }, [audioFinishWorkingRef]);
+		audioFinishWorkingRef.current	  
+	  }, []);
 
 
 
