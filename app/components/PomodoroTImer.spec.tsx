@@ -1,11 +1,16 @@
-import { fireEvent, getByTestId, render, screen, waitFor } from '@testing-library/react'
-import PomodoroTimer from './PomodoroTimer';
+import {
+  fireEvent,
+  getByTestId,
+  getByText,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import PomodoroTimer from "./PomodoroTimer";
 
-import { act } from 'react-dom/test-utils';
+import { act } from "react-dom/test-utils";
 
-
-describe('Pomodoro Component', () => {
-
+describe("Pomodoro Component", () => {
   beforeEach(() => {
     // Configuração inicial para cada teste
     jest.clearAllMocks();
@@ -16,31 +21,49 @@ describe('Pomodoro Component', () => {
     jest.clearAllMocks();
   });
 
-  it('Shold render Pomodoro Timer', () => {
-
-    const { getByTestId } = render(<PomodoroTimer pomodoroTime={1500} shortRestTime={300} longRestTime={900} cycles={4} />);
-    expect(getByTestId('pomodoro-timer')).toBeTruthy()
-
-  })
-
-  it('Should start with default values', () => {
-    const { getByTestId } = render(<PomodoroTimer pomodoroTime={1500} shortRestTime={300} longRestTime={900} cycles={4} />);
-
-    expect(getByTestId('pomodoro-timer')).toHaveTextContent('25:00');
-
-    expect(getByTestId('ciclos-concluidos')).toHaveTextContent('Ciclos Concluídos: 0');
-
-    expect(getByTestId('horas-trabalhadas')).toHaveTextContent('Horas Trabalhadas: 00:00:00');
-
-    expect(getByTestId('pomodoros-concluidos')).toHaveTextContent('Pomodoros Concluídos: 0');
+  it("Shold render Pomodoro Timer", () => {
+    const { getByTestId } = render(
+      <PomodoroTimer
+        pomodoroTime={1500}
+        shortRestTime={300}
+        longRestTime={900}
+        cycles={4}
+      />
+    );
+    expect(getByTestId("pomodoro-timer")).toBeTruthy();
   });
 
+  it("Should start with default values", () => {
+    const { getByTestId } = render(
+      <PomodoroTimer
+        pomodoroTime={1500}
+        shortRestTime={300}
+        longRestTime={900}
+        cycles={4}
+      />
+    );
 
-  it('Should increment pomodoro after 25 minutes', async () => {
+    expect(getByTestId("pomodoro-timer")).toHaveTextContent("25:00");
 
+    expect(getByTestId("ciclos-concluidos")).toHaveTextContent(
+      "Ciclos Concluídos: 0"
+    );
+
+    expect(getByTestId("horas-trabalhadas")).toHaveTextContent(
+      "Horas Trabalhadas: 00:00:00"
+    );
+
+    expect(getByTestId("pomodoros-concluidos")).toHaveTextContent(
+      "Pomodoros Concluídos: 0"
+    );
+  });
+
+  it("Should increment pomodoro after 25 minutes", async () => {
     jest.useFakeTimers();
     const mockPlay = jest.fn();
-    jest.spyOn(global.HTMLMediaElement.prototype, 'play').mockImplementation(mockPlay);
+    jest
+      .spyOn(global.HTMLMediaElement.prototype, "play")
+      .mockImplementation(mockPlay);
 
     const { getByTestId, getByText } = render(
       <PomodoroTimer
@@ -52,10 +75,9 @@ describe('Pomodoro Component', () => {
     );
 
     act(() => {
-      const startCycleButton = getByText('Working');
+      const startCycleButton = getByText("Working");
       fireEvent.click(startCycleButton);
     });
-
 
     //incremento por segundo
 
@@ -65,26 +87,25 @@ describe('Pomodoro Component', () => {
       });
     }
 
-    expect(getByTestId('horas-trabalhadas')).toHaveTextContent(
-      'Horas Trabalhadas: 00:25:00'
+    expect(getByTestId("horas-trabalhadas")).toHaveTextContent(
+      "Horas Trabalhadas: 00:25:00"
     );
 
-    expect(getByTestId('ciclos-concluidos')).toHaveTextContent(
-      'Ciclos Concluídos: 0'
+    expect(getByTestId("ciclos-concluidos")).toHaveTextContent(
+      "Ciclos Concluídos: 0"
     );
 
-    expect(getByTestId('pomodoros-concluidos')).toHaveTextContent(
-      'Pomodoros Concluídos: 1'
+    expect(getByTestId("pomodoros-concluidos")).toHaveTextContent(
+      "Pomodoros Concluídos: 1"
     );
-
-
   });
 
-  it('Should increment 1 clicle after 4 pomodores completed', async () => {
-
+  it("Should increment 1 clicle after 4 pomodores completed", async () => {
     jest.useFakeTimers();
     const mockPlay = jest.fn();
-    jest.spyOn(global.HTMLMediaElement.prototype, 'play').mockImplementation(mockPlay);
+    jest
+      .spyOn(global.HTMLMediaElement.prototype, "play")
+      .mockImplementation(mockPlay);
 
     const { getByTestId, getByText } = render(
       <PomodoroTimer
@@ -96,7 +117,7 @@ describe('Pomodoro Component', () => {
     );
 
     act(() => {
-      const startCycleButton = getByText('Working');
+      const startCycleButton = getByText("Working");
       fireEvent.click(startCycleButton);
     });
 
@@ -107,23 +128,19 @@ describe('Pomodoro Component', () => {
       });
     }
 
-
     //100 minutos trabalhados
-    expect(getByTestId('horas-trabalhadas')).toHaveTextContent(
-      'Horas Trabalhadas: 01:40:00'
+    expect(getByTestId("horas-trabalhadas")).toHaveTextContent(
+      "Horas Trabalhadas: 01:40:00"
     );
 
-    expect(getByTestId('ciclos-concluidos')).toHaveTextContent(
-      'Ciclos Concluídos: 1'
+    expect(getByTestId("ciclos-concluidos")).toHaveTextContent(
+      "Ciclos Concluídos: 1"
     );
 
-    expect(getByTestId('pomodoros-concluidos')).toHaveTextContent(
-      'Pomodoros Concluídos: 4'
+    expect(getByTestId("pomodoros-concluidos")).toHaveTextContent(
+      "Pomodoros Concluídos: 4"
     );
-
-
   });
-
 
   // it('Should Play the music play when you click on working', async () => {
 
@@ -149,7 +166,6 @@ describe('Pomodoro Component', () => {
 
   // });
 
-
   // it('Should called Play 3 times', async () => {
 
   //   jest.useFakeTimers();
@@ -171,7 +187,6 @@ describe('Pomodoro Component', () => {
   //     const startCycleButton = getByText('Working');
   //     fireEvent.click(startCycleButton);
   //   });
-
 
   //   for (let i = 0; i < Timeworkedplusresttime; i++) {
   //     act(() => {
@@ -211,9 +226,8 @@ describe('Pomodoro Component', () => {
   //   }
   // });
 
-  it('Should Play the music play when you click on working', async () => {
-
-    const { } = render(
+  it("Should Play the music play when you click on working", async () => {
+    const { getByTestId, getByText } = render(
       <PomodoroTimer
         pomodoroTime={1500}
         shortRestTime={300}
@@ -222,31 +236,54 @@ describe('Pomodoro Component', () => {
       />
     );
 
-    const audioStartWorking = screen.getByTestId('audio-start-working') as HTMLAudioElement;
-    const audioFinishWorking = screen.getByTestId('audio-finish-working') as HTMLAudioElement;
+    const audioStartWorking = getByTestId(
+      "audio-start-working"
+    ) as HTMLAudioElement;
+    const audioFinishWorking = getByTestId(
+      "audio-finish-working"
+    ) as HTMLAudioElement;
 
-    const playStartSpy = jest.spyOn(audioStartWorking, 'play');
-    const playFinishSpy = jest.spyOn(audioFinishWorking, 'play'); 
+    const playStartSpy = jest.spyOn(audioStartWorking, "play");
+    // const playFinishSpy = jest.spyOn(audioFinishWorking, 'play');
 
-    // act(() => {
-    //   const startCycleButton = getByText('Working');
-    //   fireEvent.click(startCycleButton);
-    // });
+    const playFinishSpy = jest.fn();
 
-    // act(() => {
-    //   const startCycleButton = getByText('Working');
-    //   fireEvent.click(startCycleButton);
-    // });
+    act(() => {
+      const startCycleButton = getByText("Working");
+      fireEvent.click(startCycleButton);
+    });
 
     audioStartWorking.play();
 
-    expect(playStartSpy).toHaveBeenCalledTimes(1);
+    // 1 do audioStartWorking e +1 do fireEvent.click
+    expect(playStartSpy).toHaveBeenCalledTimes(2);
     expect(playFinishSpy).not.toHaveBeenCalled();
-
   });
 
+  it("Should return call for audioFinishWorking", async () => {
+    const { getByTestId } = render(
+      <PomodoroTimer
+        pomodoroTime={1500}
+        shortRestTime={300}
+        longRestTime={900}
+        cycles={4}
+      />
+    );
 
+    const audioStartWorking = getByTestId(
+      "audio-start-working"
+    ) as HTMLAudioElement;
+    const audioFinishWorking = getByTestId(
+      "audio-finish-working"
+    ) as HTMLAudioElement;
 
+    const playFinishSpy = jest.spyOn(audioFinishWorking, "play");
 
+    const playStartSpy = jest.fn();
 
-})
+    audioFinishWorking.play();
+
+    expect(playFinishSpy).toHaveBeenCalledTimes(1);
+    expect(playStartSpy).not.toHaveBeenCalled();
+  });
+});

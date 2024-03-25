@@ -31,16 +31,16 @@ export default function PomodoroTimer(props: Props) {
 	const [numberOfPomodoros,setNumberOfPomodoros] = useState(0);
 
 	const audioStartWorkingRef = useRef<HTMLAudioElement>(null);
-  	const audioFinishWorkingRef = useRef<HTMLAudioElement>(null);
+  const audioFinishWorkingRef = useRef<HTMLAudioElement>(null);
 
-	  useEffect(() => {
-		audioStartWorkingRef.current
-	
-	  }, []);
+	  // useEffect(() => {
+		// audioStartWorkingRef.current
 
-	  useEffect(() => {
-		audioFinishWorkingRef.current	  
-	  }, []);
+	  // }, []);
+
+	  // useEffect(() => {
+		// audioFinishWorkingRef.current
+	  // }, []);
 
 
 
@@ -54,7 +54,7 @@ export default function PomodoroTimer(props: Props) {
 		setResting(false);
 		setMainTime(props.pomodoroTime);
 		// audioStartWorking?.play();
-		audioStartWorkingRef.current?.play();	  
+		audioStartWorkingRef.current?.play();
 	},[setTimeConting,setWorking,setResting,setMainTime,props.pomodoroTime])
 
 	const configureResting = useCallback((long:boolean) => {
@@ -92,7 +92,7 @@ export default function PomodoroTimer(props: Props) {
 	return (
 		<>
 		<audio data-testid="audio-start-working" ref={audioStartWorkingRef} src='/sounds/bell-start.mp3' />
-      	<audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
+    <audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
 		<div data-testid="pomodoro-timer" className='pomodoro'>
 			<h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
 			<Timer mainTime={mainTime} />
