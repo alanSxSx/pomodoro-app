@@ -31,7 +31,7 @@ export default function PomodoroTimer(props: Props) {
 	const [numberOfPomodoros,setNumberOfPomodoros] = useState(0);
 
 	const audioStartWorkingRef = useRef<HTMLAudioElement>(null);
-  const audioFinishWorkingRef = useRef<HTMLAudioElement>(null);
+ 	const audioFinishWorkingRef = useRef<HTMLAudioElement>(null);
 
 	  // useEffect(() => {
 		// audioStartWorkingRef.current
@@ -48,7 +48,7 @@ export default function PomodoroTimer(props: Props) {
 	if (working) setFullWorkingTime(fullWorkingTime + 1)
 	}, timeConting ? 1000 : null)
 
-	const configureWork = useCallback (() => {
+		const configureWork = useCallback (() => {
 		setTimeConting(true);
 		setWorking(true);
 		setResting(false);
@@ -92,14 +92,14 @@ export default function PomodoroTimer(props: Props) {
 	return (
 		<>
 		<audio data-testid="audio-start-working" ref={audioStartWorkingRef} src='/sounds/bell-start.mp3' />
-    <audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
+    	<audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
 		<div data-testid="pomodoro-timer" className='pomodoro'>
 			<h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
 			<Timer mainTime={mainTime} />
 			<div className="controls">
 				<Button data-testid="start-cycle-button" text='Working' onClick={() => configureWork()} />
-				<Button text='Rest' onClick={() => configureResting(false)} />
-				<Button className={!working && !resting ? 'hidden' : ''} text={timeConting? 'Pause' : 'Play'} onClick={() => setTimeConting(!timeConting)} />
+				<Button data-testid="rest-button" text='Rest' onClick={() => configureResting(false)} />
+				<Button data-testid="play-pause-button" className={!working && !resting ? 'hidden' : ''} text={timeConting? 'Pause' : 'Play'} onClick={() => setTimeConting(!timeConting)} />
 			</div>
 			<div className="details">
 				<p data-testid="ciclos-concluidos" >Ciclos Concluídos: {completedCycles}</p>
