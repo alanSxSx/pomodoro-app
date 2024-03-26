@@ -283,8 +283,8 @@ describe("Pomodoro Component", () => {
   });
 
 
-  it("Should call for configureResting after click rest-button", async () => {
-    const { getByText,findByTestId } = render(
+  it("Should call for audioFinishWorking after click rest-button", async () => {
+    const { getByText,getByTestId } = render(
       <PomodoroTimer
         pomodoroTime={1500}
         shortRestTime={300}
@@ -293,28 +293,49 @@ describe("Pomodoro Component", () => {
       />
     );
 
-    const configureRestingMock = jest.fn();
-
-    PomodoroTimer.prototype.configureResting = configureRestingMock;
-
-    act(() => {
-      const startCycleButton = getByText("Working");
-      fireEvent.click(startCycleButton);
-    });
-
-
-
     act(() => {
       const startRestButton = getByText("Rest");
       fireEvent.click(startRestButton);
     });
 
-    
+		const audioFinishWorking = getByTestId(
+      "audio-finish-working"
+    ) as HTMLAudioElement;
 
+		const playFinishSpy = jest.spyOn(audioFinishWorking, "play");
 
-    expect(configureRestingMock).toHaveBeenCalledWith(false);
+		expect(playFinishSpy).toHaveBeenCalledTimes(1);
 
+})
 
+it("Should Should play or pause for click", async () => {
+	const { getByText,getByTestId } = render(
+		<PomodoroTimer
+			pomodoroTime={1500}
+			shortRestTime={300}
+			longRestTime={900}
+			cycles={4}
+		/>
+	);
+
+	const playPauseButton = getByText('Play');
+
+	act(() => {
+		const PlayPauseButton = getByText("Play");
+		fireEvent.click(PlayPauseButton);
+	});
+
+	act(() => {
+		const PlayPauseButton = getByText("Pause");
+		fireEvent.click(PlayPauseButton);
+	});
+
+	act(() => {
+		const PlayPauseButton = getByText("Play");
+		fireEvent.click(PlayPauseButton);
+	});
+
+	expect(playPauseButton.textContent).toBe('Pause');
 
 })
 

@@ -92,7 +92,7 @@ export default function PomodoroTimer(props: Props) {
 	return (
 		<>
 		<audio data-testid="audio-start-working" ref={audioStartWorkingRef} src='/sounds/bell-start.mp3' />
-    	<audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
+    <audio data-testid="audio-finish-working" ref={audioFinishWorkingRef} src='/sounds/bell-finish.mp3' />
 		<div data-testid="pomodoro-timer" className='pomodoro'>
 			<h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
 			<Timer mainTime={mainTime} />
