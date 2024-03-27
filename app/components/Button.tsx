@@ -10,7 +10,7 @@ export default function Button(props:Props) {
 
 	return (
 
-	<button onClick={props.onClick} className={props.className} >{props.text}</button>
+	<button data-testid="button-component" onClick={props.onClick} className={props.className} >{props.text}</button>
 
 	)
 }

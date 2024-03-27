@@ -9,7 +9,7 @@ export default function Timer(props:Props) {
 
 	return (
 
-	<div className="timer">
+	<div data-testid = "timer-component" className="timer">
 		{SecondToMinutes(props.mainTime)}
 	</div>
 
