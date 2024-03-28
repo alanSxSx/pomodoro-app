@@ -244,8 +244,6 @@ describe("Pomodoro Component", () => {
     const playStartSpy = jest.spyOn(audioStartWorking, "play");
     // const playFinishSpy = jest.spyOn(audioFinishWorking, 'play');
 
-    const playFinishSpy = jest.fn();
-
     act(() => {
       const startCycleButton = getByText("Working");
       fireEvent.click(startCycleButton);
@@ -255,7 +253,7 @@ describe("Pomodoro Component", () => {
 
     // 1 do audioStartWorking e +1 do fireEvent.click
     expect(playStartSpy).toHaveBeenCalledTimes(2);
-    expect(playFinishSpy).not.toHaveBeenCalled();
+
   });
 
   it("Should return call for audioFinishWorking", async () => {
@@ -274,12 +272,10 @@ describe("Pomodoro Component", () => {
 
     const playFinishSpy = jest.spyOn(audioFinishWorking, "play");
 
-    const playStartSpy = jest.fn();
-
     audioFinishWorking.play();
 
     expect(playFinishSpy).toHaveBeenCalledTimes(1);
-    expect(playStartSpy).not.toHaveBeenCalled();
+  
   });
 
 
